@@ -15,20 +15,9 @@
 
     <input type="text" id="message" placeholder="Ask me anything...">
     <button onclick="sendMessage()">Send</button>
+     <button onclick="chatbox.innerHTML=''">Clear Chat</button>   
 
-    <script>
-        function sendMessage() {
-            const input = document.getElementById("message");
-            const chatbox = document.getElementById("chatbox");
-
-            if (input.value.trim() === "") return;
-            const p = document.createElement("p");
-            p.textContent = "You: " + input.value;
-            chatbox.appendChild(p);
-
-            input.value = "";
-        }
-    </script>
+   <script src="script.js"></script>
 </div>
 </body>
 </html>
