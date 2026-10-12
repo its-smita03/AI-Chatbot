@@ -1,2 +1,2 @@
 # AI-Chatbot
-Ai Chatbot Web Application
+AI Chatbot Web Application
