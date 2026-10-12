@@ -1,6 +1,7 @@
 const input = document.getElementById("message");
 const chatbox = document.getElementById("chatbox");
 const form = document.getElementById("chatForm");
+const clearButton = document.getElementById("clear");
 
 function addMessage(sender, message, type) {
     const welcome = document.getElementById("welcome");
@@ -30,9 +31,10 @@ function getReply(message) {
         return "Python is a beginner-friendly programming language used in AI, automation and data analysis.";
 
     if (text.includes("java"))
-        return "Java is an object-oriented programming language used to build many types of applications.";
+        return "Java is an object-oriented programming language used to build applications.";
 
-    if (text.includes("artificial intelligence") || text.includes("what is ai"))
+    if (text.includes("what is ai") ||
+        text.includes("artificial intelligence"))
         return "AI stands for Artificial Intelligence. It helps computers perform tasks that normally require human intelligence.";
 
     if (text.includes("thank"))
@@ -44,7 +46,7 @@ function getReply(message) {
     if (text.includes("bye"))
         return "Goodbye! 👋 See you again.";
 
-    return "I am Nova AI Demo. I can answer some basic questions about AI, Python, Java and jokes. Real AI connection is not enabled yet.";
+    return "I am Nova AI Demo. Try asking me about AI, Python, Java, or jokes. Real AI is not connected yet.";
 }
 
 function sendMessage() {
@@ -59,32 +61,23 @@ function sendMessage() {
     }, 300);
 }
 
-if (form) {
-    form.addEventListener("submit", function(event) {
-        event.preventDefault();
-        sendMessage();
-    });
-} else {
-    input.addEventListener("keydown", function(event) {
-        if (event.key === "Enter") {
-            event.preventDefault();
-            sendMessage();
-        }
-    });
-}
+form.addEventListener("submit", function(event) {
+    event.preventDefault();
+    sendMessage();
+});
 
-const clearButton = document.getElementById("clear");
+clearButton.addEventListener("click", function() {
+    chatbox.innerHTML = "";
 
-if (clearButton) {
-    clearButton.addEventListener("click", function() {
-        chatbox.innerHTML = `
-            <div class="welcome" id="welcome">
-                <h2>👋 Hello there!</h2>
-                <p>Welcome to Nova AI.<br>
-                Type a message below to start chatting.</p>
-            </div>
-        `;
-        input.value = "";
-        input.focus();
-    });
-}
+    const welcome = document.createElement("div");
+    welcome.className = "welcome";
+    welcome.id = "welcome";
+    welcome.innerHTML =
+        "<h2>👋 Hello there!</h2>" +
+        "<p>Welcome to Nova AI.<br>" +
+        "Type a message below to start chatting.</p>";
+
+    chatbox.appendChild(welcome);
+    input.value = "";
+    input.focus();
+});
