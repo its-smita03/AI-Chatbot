@@ -20,7 +20,6 @@
             const chatbox = document.getElementById("chatbox");
 
             if (input.value.trim() === "") return;
-
             const p = document.createElement("p");
             p.textContent = "You: " + input.value;
             chatbox.appendChild(p);
