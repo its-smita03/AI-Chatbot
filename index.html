@@ -242,15 +242,20 @@ form.addEventListener("submit", function(event) {
     }, 500);
 });
 
+```javascript
 document.getElementById("clear").addEventListener("click", function() {
-    chatbox.innerHTML = 
-        <div class="welcome" id="welcome">
-            <h2>👋 Hello there!</h2>
-            <p>Welcome to Nova AI.<br>
-            Type a message below to start chatting.</p>
-        </div>
-    ;
+    chatbox.innerHTML = "";
+
+    const welcomeMessage = document.createElement("div");
+    welcomeMessage.className = "welcome";
+    welcomeMessage.innerHTML =
+        "<h2>👋 Hello there!</h2>" +
+        "<p>Welcome to Nova AI.<br>" +
+        "Type a message below to start chatting.</p>";
+
+    chatbox.appendChild(welcomeMessage);
 });
+```
 
 </script>
 </body>
