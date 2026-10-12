@@ -199,12 +199,15 @@ footer {
                 reply = "Java is an object-oriented programming language.";
             } else if (/ai|artificial intelligence/i.test(text)) {
                 reply = "AI means Artificial Intelligence. It enables computers to perform tasks that usually require human intelligence.";
-            } else if (/thank/i.test(text)) {
-                reply = "You're welcome!";
-            } else {
-                reply = "I received your message: \"" + text +
-                    "\". This is a demo reply, not a real AI-generated answer.";
-            }
+            
+} else if (/joke/i.test(text)) {
+    reply = "Why did the computer go to the doctor? Because it caught a virus! 😂";
+} else if (/thank/i.test(text)) {
+    reply = "You're welcome!";
+} else {
+    reply = "I'm Nova AI Demo. Try asking me about AI, Python, Java, or jokes.";
+}
+
 
             addMessage("Nova AI", reply, "bot");
             send.disabled = false;
