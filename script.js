@@ -2,6 +2,7 @@ const input = document.getElementById("message");
 const chatbox = document.getElementById("chatbox");
 const form = document.getElementById("chatForm");
 const clearButton = document.getElementById("clear");
+const sendButton = document.getElementById("send");
 
 function addMessage(sender, message, type) {
     const welcome = document.getElementById("welcome");
@@ -18,10 +19,10 @@ function addMessage(sender, message, type) {
 function getReply(message) {
     const text = message.toLowerCase();
 
-    if (/hello|hi|hey/.test(text))
+    if (/\b(hello|hi|hey)\b/.test(text))
         return "Hello! 😊 Welcome to Nova AI.";
 
-    if (text.includes("your name"))
+    if (text.includes("your name") || text.includes("who are you"))
         return "My name is Nova AI. 🤖";
 
     if (text.includes("joke"))
@@ -33,8 +34,7 @@ function getReply(message) {
     if (text.includes("java"))
         return "Java is an object-oriented programming language used to build applications.";
 
-    if (text.includes("what is ai") ||
-        text.includes("artificial intelligence"))
+    if (text.includes("what is ai") || text.includes("artificial intelligence"))
         return "AI stands for Artificial Intelligence. It helps computers perform tasks that normally require human intelligence.";
 
     if (text.includes("thank"))
@@ -46,38 +46,37 @@ function getReply(message) {
     if (text.includes("bye"))
         return "Goodbye! 👋 See you again.";
 
-    return "I am Nova AI Demo. Try asking me about AI, Python, Java, or jokes. Real AI is not connected yet.";
+    return "I'm Nova AI Demo. Try asking me about AI, Python, Java, or jokes. Real AI is not connected yet.";
 }
 
-function sendMessage() {
+form.addEventListener("submit", function(event) {
+    event.preventDefault();
+
     const message = input.value.trim();
     if (!message) return;
 
     addMessage("You", message, "user");
     input.value = "";
 
+    sendButton.disabled = true;
+    sendButton.textContent = "Wait...";
+
     setTimeout(function() {
         addMessage("Nova AI", getReply(message), "bot");
+        sendButton.disabled = false;
+        sendButton.textContent = "Send ➤";
+        input.focus();
     }, 300);
-}
-
-form.addEventListener("submit", function(event) {
-    event.preventDefault();
-    sendMessage();
 });
 
 clearButton.addEventListener("click", function() {
-    chatbox.innerHTML = "";
+    chatbox.innerHTML = `
+        <div class="welcome" id="welcome">
+            <h2>👋 Hello there!</h2>
+            <p>Welcome to Nova AI.<br>
+            Type a message below to start chatting.</p>
+        </div>`;
 
-    const welcome = document.createElement("div");
-    welcome.className = "welcome";
-    welcome.id = "welcome";
-    welcome.innerHTML =
-        "<h2>👋 Hello there!</h2>" +
-        "<p>Welcome to Nova AI.<br>" +
-        "Type a message below to start chatting.</p>";
-
-    chatbox.appendChild(welcome);
     input.value = "";
     input.focus();
 });
