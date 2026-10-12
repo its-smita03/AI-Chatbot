@@ -153,84 +153,8 @@ footer {
 
 </div>
 
-<script>
-(function () {
-    const chatbox = document.getElementById("chatbox");
-    const input = document.getElementById("message");
-    const form = document.getElementById("chatForm");
-    const send = document.getElementById("send");
-    const clear = document.getElementById("clear");
 
-    function addMessage(sender, text, type) {
-        const welcome = document.getElementById("welcome");
-        if (welcome) welcome.remove();
+<script src="script.js"></script>
 
-        const item = document.createElement("div");
-        item.className = "message " + type;
-        item.textContent = sender + ": " + text;
-
-        chatbox.appendChild(item);
-        chatbox.scrollTop = chatbox.scrollHeight;
-    }
-
-    form.addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        const text = input.value.trim();
-        if (!text) return;
-
-        addMessage("You", text, "user");
-        input.value = "";
-        input.focus();
-
-        send.disabled = true;
-        send.textContent = "Wait...";
-
-        setTimeout(function () {
-            let reply;
-
-            if (/hello|hi|hey/i.test(text)) {
-                reply = "Hello! Welcome to Nova AI. How can I help you?";
-            } else if (/your name|who are you/i.test(text)) {
-                reply = "I am Nova AI, your chatbot demo assistant.";
-            } else if (/python/i.test(text)) {
-                reply = "Python is a programming language known for its simple syntax.";
-            } else if (/java/i.test(text)) {
-                reply = "Java is an object-oriented programming language.";
-            } else if (/ai|artificial intelligence/i.test(text)) {
-                reply = "AI means Artificial Intelligence. It enables computers to perform tasks that usually require human intelligence.";
-            
-} else if (/joke/i.test(text)) {
-    reply = "Why did the computer go to the doctor? Because it caught a virus! 😂";
-} else if (/thank/i.test(text)) {
-    reply = "You're welcome!";
-} else {
-    reply = "I'm Nova AI Demo. Try asking me about AI, Python, Java, or jokes.";
-}
-
-
-            addMessage("Nova AI", reply, "bot");
-            send.disabled = false;
-            send.textContent = "Send ➤";
-        }, 300);
-    });
-
-    clear.addEventListener("click", function () {
-        chatbox.innerHTML = "";
-
-        const welcome = document.createElement("div");
-        welcome.className = "welcome";
-        welcome.id = "welcome";
-        welcome.innerHTML =
-            "<h2>👋 Hello there!</h2>" +
-            "<p>Welcome to Nova AI.<br>" +
-            "Type a message below to start chatting.</p>";
-
-        chatbox.appendChild(welcome);
-        input.value = "";
-        input.focus();
-    });
-})();
-</script>
 </body>
 </html>
